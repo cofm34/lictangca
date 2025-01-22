@@ -41,7 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
             monthHeader: "Tháng",
             totalHoursHeader: "Tổng số giờ tăng ca",
             hours: "giờ",
-            delete: "Xóa"
+            delete: "Xóa",
+            hidden: "Ẩn",
+            toggle: "Ẩn/Hiện",
+            confirmDelete: "Bạn có chắc muốn xóa?"
+
         },
         tw: {
             title: "加班管理",
@@ -50,10 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
             monthHeader: "月份",
             totalHoursHeader: "加班總時數",
             hours: "小時",
-            delete: "刪除"
+            delete: "刪除",
+            hidden: "隱藏",
+            toggle: "隱藏/顯示",
+            confirmDelete: "你確定要刪除嗎？"
+
         }
     };
-
+    
     const updateLanguage = (lang) => {
         currentLanguage = lang;
         const translation = translations[lang];
@@ -65,30 +73,92 @@ document.addEventListener("DOMContentLoaded", () => {
         renderList();
         renderMonthlyOvertime();
     };
-
+    
     const renderList = () => {
         overtimeList.innerHTML = "";
+        const groupedByMonth = {};
+    
+        // Group entries by month
         overtimeDays.forEach(entry => {
-            const date = new Date(entry.date);
-            date.setDate(date.getDate() + 1); // Add one day
-            const formattedDate = date.toISOString().split('T')[0]; // Format the date as YYYY-MM-DD
-            const li = document.createElement("li");
-            li.textContent = `${formattedDate}: ${entry.hours} ${translations[currentLanguage].hours}`;
-            const removeButton = document.createElement("button");
-            removeButton.textContent = translations[currentLanguage].delete;
-            removeButton.onclick = () => {
-                const index = overtimeDays.indexOf(entry);
-                if (index !== -1) {
-                    overtimeDays.splice(index, 1);
+            const month = entry.date.slice(0, 7); // Get the YYYY-MM part of the date
+            if (!groupedByMonth[month]) {
+                groupedByMonth[month] = [];
+            }
+            groupedByMonth[month].push(entry);
+        });
+    
+        // Render entries grouped by month
+        Object.keys(groupedByMonth).forEach(month => {
+            const monthContainer = document.createElement("div");
+            monthContainer.className = "month-container";
+    
+            const monthHeader = document.createElement("h3");
+            monthHeader.textContent = month;
+            monthContainer.appendChild(monthHeader);
+    
+            const toggleButton = document.createElement("button");
+            toggleButton.textContent = translations[currentLanguage].toggle;
+            toggleButton.onclick = () => {
+                const monthEntries = monthContainer.querySelector(".month-entries");
+                monthEntries.classList.toggle("hidden");
+            };
+            monthContainer.appendChild(toggleButton);
+    
+            const removeMonthButton = document.createElement("button");
+            removeMonthButton.textContent = `${translations[currentLanguage].delete} ${month}`;
+            removeMonthButton.onclick = () => {
+                if (confirm(translations[currentLanguage].confirmDelete)) {
+                    groupedByMonth[month].forEach(entry => {
+                        const index = overtimeDays.indexOf(entry);
+                        if (index !== -1) {
+                            overtimeDays.splice(index, 1);
+                        }
+                    });
                     localStorage.setItem("overtimeDays", JSON.stringify(overtimeDays));
                     renderList();
                     renderMonthlyOvertime();
                 }
             };
-            li.appendChild(removeButton);
-            overtimeList.appendChild(li);
+            monthContainer.appendChild(removeMonthButton);
+    
+            const monthEntries = document.createElement("div");
+            monthEntries.className = "month-entries";
+    
+            groupedByMonth[month].forEach(entry => {
+                const date = new Date(entry.date);
+                date.setDate(date.getDate() + 1); // Add one day
+                const formattedDate = date.toISOString().split('T')[0]; // Format the date as YYYY-MM-DD
+                const li = document.createElement("li");
+                li.textContent = `${formattedDate}: ${entry.hours} ${translations[currentLanguage].hours}`;
+                const removeButton = document.createElement("button");
+                removeButton.textContent = translations[currentLanguage].delete;
+                removeButton.onclick = () => {
+                    if (confirm(translations[currentLanguage].confirmDelete)) {
+                        const index = overtimeDays.indexOf(entry);
+                        if (index !== -1) {
+                            overtimeDays.splice(index, 1);
+                            localStorage.setItem("overtimeDays", JSON.stringify(overtimeDays));
+                            renderList();
+                            renderMonthlyOvertime();
+                        }
+                    }
+                };
+                li.appendChild(removeButton);
+                monthEntries.appendChild(li);
+            });
+    
+            monthContainer.appendChild(monthEntries);
+            overtimeList.appendChild(monthContainer);
         });
     };
+    // CSS to hide elements
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .hidden {
+            display: none;
+        }
+    `;
+    document.head.appendChild(style);
 
     const renderMonthlyOvertime = () => {
         const monthlyOvertime = {};
