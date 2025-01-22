@@ -2,10 +2,12 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 20px;
+    margin: 10px; /* Giảm margin để tránh tràn */
     background-image: url(https://www.chief-tools.com/images/img_25.jpg);
-    background-position: 0%;
-    color: white; /* Set text color to white for the body */
+    background-position: center;
+    background-size: cover; /* Đảm bảo ảnh nền không bị lặp hoặc tràn */
+    color: white;
+    overflow-x: hidden; /* Ngăn tràn ngang */
 }
 
 /* Header */
@@ -17,45 +19,43 @@ header {
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 28px; /* Giảm kích thước font trên di động */
     margin-bottom: 20px;
-    color: white; /* Set header text to white */
+    color: white;
 }
 
 label {
-    color: white; /* Set label text to white */
-    text-decoration: none;
+    color: white;
 }
 
 #language-options {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    color: white; /* Set language options text to white */
+    gap: 5px; /* Giảm khoảng cách */
+    flex-wrap: wrap; /* Cho phép wrap các nút */
+    margin-bottom: 15px;
+    color: white;
 }
 
 .lang-btn {
-    font-size: 16px; /* Adjust font size */
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px; /* Add padding to make the button smaller */
+    font-size: 14px; /* Điều chỉnh kích thước chữ */
+    padding: 5px; /* Giảm padding */
 }
 
 .lang-btn img {
-    width: 50px; /* Adjust image size */
-    height: 50px; /* Keep the image size consistent */
+    width: 40px; /* Giảm kích thước ảnh */
+    height: 40px;
 }
 
 #month-selector {
     display: flex;
+    flex-wrap: wrap; /* Cho phép dòng thứ hai nếu không đủ chỗ */
     align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 5px;
+    margin-bottom: 15px;
 }
 
 #month-selector label {
-    font-size: 16px;
+    font-size: 14px; /* Giảm kích thước chữ */
 }
 
 /* Lịch */
@@ -63,46 +63,61 @@ label {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 40px; /* Khoảng cách giữa các tháng */
-    margin-top: 20px;
+    gap: 20px; /* Giảm khoảng cách giữa các tháng */
+    margin-top: 15px;
+}
+
+
+button {
+    padding: 5px 5px;
+    font-size: 5px;
+    color: #fff;
+    background-color: #007bff; /* Blue background */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue background on hover */
 }
 
 /* Thiết kế từng tháng */
 .month {
-    width: 450px; /* Increase width */
-    min-height: 450px; /* Increase height */
+    width: 100%;
+    max-width: 350px; /* Giảm kích thước tối đa */
+    min-height: 350px; /* Giảm chiều cao tối thiểu */
     text-align: center;
-    margin: 10px;
-    background-color: #333333; /* Dark gray background */
-    border: 1px solid #333333; /* Dark gray border */
+    margin: 10px auto;
+    background-color: #333333;
+    border: 1px solid #333333;
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
 .month h2 {
-    margin: 10px 0 20px 0;
-    font-size: 28px; /* Increase font size */
-    color: white; /* White text in the month title */
+    margin: 10px 0 15px 0;
+    font-size: 24px; /* Điều chỉnh kích thước */
+    color: white;
 }
 
 /* Dòng tiêu đề ngày trong tuần */
 .weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
+    gap: 5px; /* Giảm khoảng cách */
     margin-top: 10px;
 }
 
 .weekdays div {
     font-weight: bold;
-    color: white; /* White text for weekdays */
-    font-size: 18px; /* Increase font size */
-    text-align: center; /* Center align text */
-    padding: 15px; /* Match padding with days */
-    background-color: #444444; /* Slightly darker background for weekdays */
-    border: 1px solid #333333; /* Dark gray border for weekdays */
+    font-size: 16px; /* Điều chỉnh kích thước */
+    text-align: center;
+    padding: 10px; /* Giảm padding */
+    background-color: #444444;
+    border: 1px solid #333333;
     border-radius: 5px;
 }
 
@@ -110,30 +125,36 @@ label {
 .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
+    gap: 5px; /* Giảm khoảng cách */
     margin-top: 10px;
 }
 
+/* Cha chứa overtime-hours cần position: relative */
 .days div {
-    padding: 15px; /* Increase padding */
-    font-size: 20px; /* Increase font size */
-    background-color: #333333; /* Dark gray background for days */
-    border: 1px solid #333333; /* Dark gray border for days */
+    position: relative; /* Thêm thuộc tính này */
+    padding: 10px;
+    font-size: 16px;
+    background-color: #333333;
+    border: 1px solid rgb(149, 197, 241);
     border-radius: 5px;
     text-align: center;
-    position: relative;
-    color: white; /* White text for the days */
-    border: 1px solid rgb(149, 197, 241);
-    background-color: #035f6b0e;
-
+    color: white;
 }
+
+/* Thiết kế overtime-hours */
+.overtime-hours {
+    position: absolute;
+    bottom: 1px; /* Căn chỉnh vị trí cách đáy */
+    right: 1px; /* Căn chỉnh vị trí cách phải */
+    font-size: 12px; /* Kích thước chữ nhỏ */
+    color: yellow; /* Màu chữ */
+    z-index: 10; /* Đảm bảo nó nằm trên các phần tử khác */
+    pointer-events: none; /* Không làm ảnh hưởng khi click */
+}
+
 
 /* Thứ 7 và Chủ Nhật */
-.days div.saturday {
-    color: red;
-    font-weight: bold;
-}
-
+.days div.saturday,
 .days div.sunday {
     color: red;
     font-weight: bold;
@@ -149,31 +170,29 @@ label {
 
 /* Hover khi rê chuột qua ngày */
 .days div:hover {
-    background-color: #444444; /* Darker gray background on hover */
+    background-color: #444444;
     cursor: pointer;
 }
 
-/* Overtime hours */
-.overtime-hours {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-size: 14px; /* Increase font size */
-    color: yellow;
-}
 
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
+    h1 {
+        font-size: 24px; /* Điều chỉnh kích thước chữ */
+    }
+
+    #language-options {
+        gap: 5px;
+    }
+
     .month {
-        max-width: 100%; /* Full width on smaller screens */
+        max-width: 100%; /* Full width */
+        padding: 10px; /* Giảm padding */
     }
 
-    #monthly-overtime-table {
-        max-width: 100%; /* Full width on smaller screens */
-    }
-
-    form, #overtime-list {
-        max-width: 100%; /* Full width on smaller screens */
+    .weekdays div, .days div {
+        font-size: 14px; /* Giảm kích thước chữ */
+        padding: 8px; /* Giảm padding */
     }
 }
