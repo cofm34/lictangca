@@ -1,0 +1,179 @@
+/* Tổng quan */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-image: url(https://www.chief-tools.com/images/img_25.jpg);
+    background-position: 0%;
+    color: white; /* Set text color to white for the body */
+}
+
+/* Header */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: white; /* Set header text to white */
+}
+
+label {
+    color: white; /* Set label text to white */
+    text-decoration: none;
+}
+
+#language-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: white; /* Set language options text to white */
+}
+
+.lang-btn {
+    font-size: 16px; /* Adjust font size */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px; /* Add padding to make the button smaller */
+}
+
+.lang-btn img {
+    width: 50px; /* Adjust image size */
+    height: 50px; /* Keep the image size consistent */
+}
+
+#month-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#month-selector label {
+    font-size: 16px;
+}
+
+/* Lịch */
+#calendar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px; /* Khoảng cách giữa các tháng */
+    margin-top: 20px;
+}
+
+/* Thiết kế từng tháng */
+.month {
+    width: 450px; /* Increase width */
+    min-height: 450px; /* Increase height */
+    text-align: center;
+    margin: 10px;
+    background-color: #333333; /* Dark gray background */
+    border: 1px solid #333333; /* Dark gray border */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.month h2 {
+    margin: 10px 0 20px 0;
+    font-size: 28px; /* Increase font size */
+    color: white; /* White text in the month title */
+}
+
+/* Dòng tiêu đề ngày trong tuần */
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.weekdays div {
+    font-weight: bold;
+    color: white; /* White text for weekdays */
+    font-size: 18px; /* Increase font size */
+    text-align: center; /* Center align text */
+    padding: 15px; /* Match padding with days */
+    background-color: #444444; /* Slightly darker background for weekdays */
+    border: 1px solid #333333; /* Dark gray border for weekdays */
+    border-radius: 5px;
+}
+
+/* Các ngày trong tháng */
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.days div {
+    padding: 15px; /* Increase padding */
+    font-size: 20px; /* Increase font size */
+    background-color: #333333; /* Dark gray background for days */
+    border: 1px solid #333333; /* Dark gray border for days */
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    color: white; /* White text for the days */
+    border: 1px solid rgb(149, 197, 241);
+    background-color: #035f6b0e;
+
+}
+
+/* Thứ 7 và Chủ Nhật */
+.days div.saturday {
+    color: red;
+    font-weight: bold;
+}
+
+.days div.sunday {
+    color: red;
+    font-weight: bold;
+}
+
+/* Hiển thị ngày hôm nay */
+.days div.today {
+    border: 2px solid red;
+    color: red;
+    font-weight: bold;
+    background-color: #035f6b;
+}
+
+/* Hover khi rê chuột qua ngày */
+.days div:hover {
+    background-color: #444444; /* Darker gray background on hover */
+    cursor: pointer;
+}
+
+/* Overtime hours */
+.overtime-hours {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 14px; /* Increase font size */
+    color: yellow;
+}
+
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .month {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+
+    #monthly-overtime-table {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+
+    form, #overtime-list {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+}

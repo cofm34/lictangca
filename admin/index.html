@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý ngày tăng ca</title>
+    <link rel="stylesheet" href="note.css">
+    <script src="note.js" defer></script>
+</head>
+<body>
+    <div id="login-form">
+        <h1>LOGIN</h1>
+        <input type="password" id="password" placeholder="Nhập mật khẩu">
+        <button type="button" id="login-button">LOGIN</button>
+        <p id="login-error" style="color: red; display: none;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+    </div>
+    <div id="main-content" style="display: none;">
+        <h1 id="title">Quản lý ngày tăng ca</h1>
+        <div id="language-options">
+            <button id="lang-vi" class="lang-btn">
+                <img src="https://emojigraph.org/media/twitter/flag-vietnam_1f1fb-1f1f3.png" alt="Vietnam Flag">
+            </button>
+            <button id="lang-tw" class="lang-btn">
+                <img src="https://emojigraph.org/media/twitter/flag-taiwan_1f1f9-1f1fc.png" alt="Taiwan Flag">
+            </button>
+        </div>
+        <form>
+            <input type="date" id="overtime-date">
+            <input type="number" id="overtime-hours" placeholder="Số giờ tăng ca" min="1" max="24">
+            <button type="button" id="add-overtime">Thêm ngày tăng ca</button>
+        </form>
+        <ul id="overtime-list"></ul>
+        <h2 id="monthly-overtime-title">Tổng số giờ tăng ca theo tháng</h2>
+        <table id="monthly-overtime-table">
+            <thead>
+                <tr>
+                    <th id="month-header">Tháng</th>
+                    <th id="total-hours-header">Tổng số giờ tăng ca</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added dynamically -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
