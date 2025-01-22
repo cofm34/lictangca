@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         calendar.innerHTML = ""; // Xóa lịch cũ
         const currentYear = 2025; // Fixed year to 2025
 
-        for (let i = startMonth; i < startMonth + 2; i++) { // Display only 2 months
+        for (let i = startMonth; i < startMonth + 3; i++) { // Display 3 months
             const monthDate = new Date(currentYear, i, 1);
             calendar.appendChild(createMonth(monthDate));
         }
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderCalendar(parseInt(e.target.value));
     });
 
-    // Hiển thị mặc định 2 tháng bắt đầu từ tháng hiện tại
+    // Hiển thị mặc định 3 tháng bắt đầu từ tháng hiện tại
     const today = new Date();
     const currentMonth = today.getMonth();
     monthSelector.value = currentMonth;
